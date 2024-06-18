@@ -1,0 +1,54 @@
+  720  pwd
+  721  ls
+  722  cat > pets.txt
+  723  rm pets.txt 
+  724  ls
+  725  clear
+  726  pwd
+  727  ls
+  728  cat > pets.txt
+  729  cat > pack_animals.txt
+  730  cat pets.txt pack_animals.txt > all_animals.txt
+  731  cat all_animals.txt 
+  732  ls
+  733  mv all_animals.txt human_friends.txt
+  734  ls
+  735  cat human_friends.txt 
+  736  mkdir animals
+  737  ls
+  738  mv human_friends.txt ~/animals/
+  739  ls
+  740  ls animals/
+  741  cat > final_task_programming.txt
+  742  cp final_task_programming.txt ~/sf_UbuntuVBox/
+  743  mv final_task_programming.txt tasks_1_2.txt
+  744  mkdir final_task_programming
+  745  mv tasks_1_2.txt final_task_programming/
+  746  exit
+  747  history
+  748  sudo apt update
+  749  sudo apt upgrade
+  750  sudo apt --fix-broken install
+  751  wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
+  752  ls
+  753  dpkg -i mysql-apt-config_0.8.30-1_all.deb 
+  754  sudo dpkg -i mysql-apt-config_0.8.30-1_all.deb 
+  755  sudo apt update
+  756  sudo apt install mysql-community-server
+  757  sudo systemctl status mysql
+  758  ss -ntlp
+  759  sudo ss -ntlp
+  760  sudo apt install mysql-workbench-community
+  761  reboot
+  762  ls
+  763  ls Downloads/
+  764  dpkg -i Downloads/google-chrome-stable_current_amd64.deb 
+  765  sudo dpkg -i Downloads/google-chrome-stable_current_amd64.deb 
+  766  google-chrome --version 
+  767  dpkg -l | grep google-chrome
+  768  dpkg --help
+  769  dpkg --purge google-chrome-stable 
+  770  sudo dpkg --purge google-chrome-stable 
+  771  google-chrome --version 
+  772  dpkg -l | grep google
+  773  history
