@@ -1,3 +1,5 @@
+  Студент Тимофеев Дмитрий, группа 5428  
+  (Задание 1)
   720  pwd
   721  ls
   722  cat > pets.txt
@@ -13,7 +15,8 @@
   732  ls
   733  mv all_animals.txt human_friends.txt
   734  ls
-  735  cat human_friends.txt 
+  735  cat human_friends.txt
+  (Задание 2) 
   736  mkdir animals
   737  ls
   738  mv human_friends.txt ~/animals/
@@ -26,6 +29,7 @@
   745  mv tasks_1_2.txt final_task_programming/
   746  exit
   747  history
+  (Задание 3)
   748  sudo apt update
   749  sudo apt upgrade
   750  sudo apt --fix-broken install
@@ -40,6 +44,7 @@
   759  sudo ss -ntlp
   760  sudo apt install mysql-workbench-community
   761  reboot
+  (Задание 4)
   762  ls
   763  ls Downloads/
   764  dpkg -i Downloads/google-chrome-stable_current_amd64.deb 
