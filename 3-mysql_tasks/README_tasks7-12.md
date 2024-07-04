@@ -38,27 +38,33 @@
 
 В каждом из них, как например в camels.txt, будут содержаться строки вида:
 
+```
 ("Sand Bump", "2022-12-22", "Лежать; Подъем; Бежать галопом; Стой"),
 ("Bongo", "2020-01-02", "Лежать; Подъем; Бежать галопом; Стой"),
 ("Han", "2021-09-24", "Лежать; Подъем; Бежать галопом; Стой"),
 ("Dona", "2020-01-08", "Лежать; Подъем; Бежать галопом; Стой")
+```
 
 После этого создадим в рабочей директории файл **task7_8_9.sql**, в котором будет храниться sql код. Поместим в него следующие запросы:
 
-> -- DROP DATABASE human\_friends;
-CREATE DATABASE human\_friends;
-USE human\_friends;
+```
+-- DROP DATABASE human_friends;
+CREATE DATABASE human_friends;
+USE human_friends;
+```
 
 Далее напишем небольшой скрипт в файл *script.sh* и запустим его командной строке (предварительно выделив для этого файла право на выполнение):
 
-> #!/bin/bash
-> file\_result=task7\_8\_9.sql;
-> for table\_name in $(ls \*txt | grep -o -e "^[A-Za-z]\*"); do
->       echo -e "CREATE TABLE $table_name (\n\tid SERIAL PRIMARY KEY,\n\tanimal_name VARCHAR(30) NOT NULL,\n\tbirth_date DATE DEFAULT (CURRENT_DATE),\n\tcommands TEXT\n\t);\n" >> $file_result;
->       echo -e "INSERT INTO $table_name (animal_name, birth_date, commands)\nVALUES" >> $file_result;
->       echo -e "$(cat $table_name.txt);\n\n" >> $file_result;
-> done;
-> exit 
+```
+#!/bin/bash
+file_result=task7_8_9.sql;
+for table_name in $(ls *txt | grep -o -e "^[A-Za-z]*"); do
+    echo -e "CREATE TABLE $table_name (\n\tid SERIAL PRIMARY KEY,\n\tanimal_name VARCHAR(30) NOT NULL,\n\tbirth_date DATE DEFAULT (CURRENT_DATE),\n\tcommands TEXT\n\t);\n" >> $file_result;
+    echo -e "INSERT INTO $table_name (animal_name, birth_date, commands)\nVALUES" >> $file_result;
+    echo -e "$(cat $table_name.txt);\n\n" >> $file_result;
+done;
+exit
+```
 
 В результате выполнения данного скрипта файл task7\_8\_9.sql заполняется запросами на создание низкоуровневых таблиц с их дальнейшим наполнением 
-(см данный файл в директории 3-mysql\_tasks/task7\_8\_9)
+(см даннй файл в директории 3-mysql\_tasks/task7\_8\_9)
