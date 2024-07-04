@@ -175,3 +175,32 @@ DELIMITER ;
 
 ![Задание 10-11-12 скрин 6](descr_tasks_7-12/screenshot6.png)
 
+Как видно, обе процедуры дали одинаковый результат.
+
+Теперь удалим все записи о верблюдах из таблицы pack\_animals:
+```
+-- SET SQL_SAFE_UPDATES = 0;
+DELETE FROM pack_animals WHERE animal_kind = "camel";
+```
+![Задание 10-11-12 скрин 7](descr_tasks_7-12/screenshot7.png)
+
+Мы не стали удалять таблицу camels, произведем удаление и в ней с помощью команды TRUNCATE:
+
+![Задание 10-11-12 скрин 8](descr_tasks_7-12/screenshot8.png)
+
+Объединим таблицы pack\_animals и pet\_animals в одну таблицу – all\_animals:
+```
+CREATE TABLE all_animals LIKE pet_animals;
+ALTER TABLE all_animals
+ADD COLUMN animal_type VARCHAR(30) NOT NULL AFTER animal_name;
+INSERT INTO all_animals (animal_name,animal_type, animal_kind, birth_date, commands)
+(SELECT animal_name, 'pack_animal' AS animal_type, animal_kind, birth_date, commands FROM pack_animals AS packs
+UNION
+SELECT animal_name, 'pet_animal' AS animal_type, animal_kind, birth_date, commands FROM pet_animals AS pets);
+```
+
+Запишем запрос на объединение таблиц в файл **task10_11_12_part2.sql** и направим на исполнение в СУБД. В этот же файл поместим предыдущие запросы на удаление записей о верблюдах для отчета, закомментировав их.
+
+![Задание 10-11-12 скрин 9](descr_tasks_7-12/screenshot9.png)
+
+![Задание 10-11-12 скрин 10](descr_tasks_7-12/screenshot10.png)
