@@ -104,3 +104,69 @@ SELECT animal_name, 'donkey' AS animal_kind, birth_date, commands FROM donkeys);
 ![Задание 7-8-9 скрин 4](descr_tasks_7-12/screenshot4.png)
 
 На данном этапе можно при необходимости удалить низкоуровневые таблицы. В следующих задания будем работать с таблицами pet\_animals и pack\_animals.
+
+
+**Задание 10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой
+питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
+Задание 11.Создать новую таблицу “молодые животные” в которую попадут все
+животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+до месяца подсчитать возраст животных в новой таблице
+Задание 12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
+прошлую принадлежность к старым таблицам.**
+
+*Для данного блока заданий внутри директории 3-mysql_tasks создадим директорию task10_11_12.*
+
+Чтобы вывести животных определенной возрастной группы (старше 1 года, но младше 3 лет), создадим 2 процедуры в текущей БД, при вызове которых будет выполняться данная выборка.
+Первая процедура будет основываться на работе функции TIMESTAMPDIFF(), а вторая будет на основе расчета и применения функции FLOOR(), возвращающей целую часть числа.
+
+```
+DROP PROCEDURE IF EXISTS find_young_animals;
+DELIMITER //
+CREATE PROCEDURE find_young_animals()
+BEGIN
+    SELECT
+        animal_name,
+        animal_kind,
+        birth_date,
+        age_months
+    FROM
+    (SELECT animal_name, animal_kind, birth_date, TIMESTAMPDIFF(month, birth_date, CURDATE()) AS age_months FROM pack_animals AS packs
+    UNION
+    SELECT animal_name, animal_kind, birth_date, TIMESTAMPDIFF(month, birth_date, CURDATE()) AS age_months FROM pet_animals AS pets) AS res
+    WHERE age_months > 12 AND age_months < 36
+    ORDER BY age_months;
+END//
+DELIMITER ;
+-- CALL find_young_animals();
+```
+
+```
+DROP PROCEDURE IF EXISTS find_young_animals_manual;
+DELIMITER &&
+CREATE PROCEDURE find_young_animals_manual()
+BEGIN
+    SELECT
+        animal_name,
+        animal_kind,
+        birth_date,
+        age_months
+    FROM
+    (SELECT animal_name, animal_kind, birth_date, FLOOR(DATEDIFF(CURDATE(), birth_date)/30.4375) AS age_months FROM pack_animals AS packs
+    UNION
+    SELECT animal_name, animal_kind, birth_date, FLOOR(DATEDIFF(CURDATE(), birth_date)/30.4375) AS age_months FROM pet_animals AS pets) AS res
+    WHERE age_months > 12 AND age_months < 36
+    ORDER BY age_months;
+END&&
+DELIMITER ;
+-- CALL find_young_animals_manual();
+```
+
+*Примечание. Среднее количество дней в месяце равно за 4 года:*
+*(365\*4+1)/(12\*4)=30.4375*
+
+В рабочей директории (3-mysql\_tasks/task10\_11\_12) создадим файл **task10_11_12_proc.sql** и поместим в него эти два запроса на создание процедур. Запустим его на выполнение в СУБД и проверим результат работы этих процедур:
+
+![Задание 10-11-12 скрин 5](descr_tasks_7-12/screenshot5.png)
+
+![Задание 10-11-12 скрин 6](descr_tasks_7-12/screenshot6.png)
+
