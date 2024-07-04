@@ -22,12 +22,12 @@
 
 Для выполнения этих заданий напишем sql-скрипт, а затем будем использовать его содержимое для наполнения БД.
 
-*Для данного блока заданий внутри директории 3-mysql_tasks/создадим директорию task7_8_9/.*
+*Для данного блока заданий внутри директории 3-mysql_tasks/ создадим директорию task7_8_9/.*
 
 Для начала создадим отдельные таблицы для каждого вида животных. Заранее подумаем об атрибутах и наполнении таблиц. В низкоуровневой таблице 
 будут атрибуты кличка, дата рождения животного, его команды (а также id для идентификации в пределах конкретной таблицы).  
 
-Создадим в рабочей директории (*3-mysql_tasks/task7_8_9/*)  текстовые файлы с наполнением для таблиц: 
+Создадим в рабочей директории (*3-mysql_tasks/task7_8_9*)  текстовые файлы с наполнением для таблиц: 
 
 - cats.txt,
 - dogs.txt,
@@ -45,20 +45,20 @@
 
 После этого создадим в рабочей директории файл **task7_8_9.sql**, в котором будет храниться sql код. Поместим в него следующие запросы:
 
--- DROP DATABASE human\_friends;
+> -- DROP DATABASE human\_friends;
 CREATE DATABASE human\_friends;
 USE human\_friends;
 
 Далее напишем небольшой скрипт в файл *script.sh* и запустим его командной строке (предварительно выделив для этого файла право на выполнение):
 
-#!/bin/bash
-file\_result=task7\_8\_9.sql;
-for table\_name in $(ls *txt | grep -o -e "^[A-Za-z]*"); do
-      echo -e "CREATE TABLE $table_name (\n\tid SERIAL PRIMARY KEY,\n\tanimal_name VARCHAR(30) NOT NULL,\n\tbirth_date DATE DEFAULT (CURRENT_DATE),\n\tcommands TEXT\n\t);\n" >> $file_result;
-      echo -e "INSERT INTO $table_name (animal_name, birth_date, commands)\nVALUES" >> $file_result;
-      echo -e "$(cat $table_name.txt);\n\n" >> $file_result;
-done;
-exit 
+> #!/bin/bash
+> file\_result=task7\_8\_9.sql;
+> for table\_name in $(ls \*txt | grep -o -e "^[A-Za-z]\*"); do
+>       echo -e "CREATE TABLE $table_name (\n\tid SERIAL PRIMARY KEY,\n\tanimal_name VARCHAR(30) NOT NULL,\n\tbirth_date DATE DEFAULT (CURRENT_DATE),\n\tcommands TEXT\n\t);\n" >> $file_result;
+>       echo -e "INSERT INTO $table_name (animal_name, birth_date, commands)\nVALUES" >> $file_result;
+>       echo -e "$(cat $table_name.txt);\n\n" >> $file_result;
+> done;
+> exit 
 
 В результате выполнения данного скрипта файл task7\_8\_9.sql заполняется запросами на создание низкоуровневых таблиц с их дальнейшим наполнением 
 (см данный файл в директории 3-mysql\_tasks/task7\_8\_9)
