@@ -7,7 +7,7 @@ USE animal_house;
 CREATE TABLE animal_kinds (
 	id SERIAL PRIMARY KEY,
     animal_kind VARCHAR(40) NOT NULL UNIQUE,
-    animal_type VARCHAR(40) DEFAULT "not specified" -- если вдруг пока что тип животного для данного вида не определен
+    animal_type VARCHAR(40)
     );
 
 -- порядок будет произвольным при внесении новых видов в таблицу;
