@@ -57,3 +57,42 @@ GRANT ALL ON `animal_house`.* TO "animal_guru_111"@"localhost";
 ![Задание 13-15 скрин 4](descr_tasks_13-15/screenshot4.png)
 
 Комнады, которые были использованы при создании нового пользователя, занесем в файл **create_new_db/create_user.sql** 
+
+Создадим тестовый java-проект для подключения к СУБД с параметрами созданного пользователя. Он будет размещен в дирктории *4-Java_OOP_tasks/create_new_db/TestConnectToMysql*
+
+```
+import java.sql.*;
+
+public class TestConnectMysql {
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/animal_house";
+        String user = "animal_guru_111";
+        String password = "secretword_554326";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            System.out.println("Connection to animal_house DB is successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection is failed...");
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+}
+```
+Для подключения к СУБД mysql нам понадобится mysql-connector-j. Для этого скачиваем с сайта-разработчика deb-пакет. 
+
+![Задание 13-15 скрин 5](descr_tasks_13-15/screenshot5.png)
+
+Далее необходимо будет распаковать deb-пакет и найти в нем файл mysql-connector-j-version.jar
+
+После этого для удобства копируем этот файл в директорию, где располагается главный java-файл нашего проекта. Перейдем в эту директорию.
+А дальше запускаем наше тестовое приложение из терминала, указав путь к jar-файлу используемого коннектора в команде:
+
+```
+java -cp mysql-connector-j-9.0.0.jar ./TestConnectMysql.java
+```
+
+![Задание 13-15 скрин 6](descr_tasks_13-15/screenshot6.png)
+
+В данном случае можно после -cp просто указать название jar-файла, т.к. он расположени в текущей директории.
